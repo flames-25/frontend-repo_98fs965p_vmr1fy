@@ -1,45 +1,11 @@
 import React from 'react'
-import Spline from '@splinetool/react-spline'
-import { Mail, Phone, MapPin, Shield, ExternalLink, Github, Linkedin } from 'lucide-react'
+import { Mail, Phone, MapPin, Linkedin } from 'lucide-react'
 import Navbar from './components/Navbar'
-
-function Section({ id, title, children }) {
-  return (
-    <section id={id} className="max-w-6xl mx-auto px-4 py-16">
-      <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-6 flex items-center gap-3">
-        <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white">
-          <Shield size={18} />
-        </span>
-        {title}
-      </h2>
-      <div className="text-slate-700">{children}</div>
-    </section>
-  )
-}
-
-function Badge({ children }) {
-  return (
-    <span className="inline-flex items-center rounded-full bg-blue-50 text-blue-700 border border-blue-200 px-3 py-1 text-xs font-medium mr-2 mb-2">
-      {children}
-    </span>
-  )
-}
-
-function TimelineItem({ role, org, period, bullets }) {
-  return (
-    <div className="relative pl-6 pb-8">
-      <div className="absolute left-0 top-1.5 h-3 w-3 rounded-full bg-blue-600" />
-      <div className="absolute left-1.5 top-1.5 bottom-0 w-px bg-blue-200" />
-      <h3 className="text-lg font-semibold text-slate-900">{role} · <span className="text-blue-600">{org}</span></h3>
-      <p className="text-sm text-slate-500 mb-3">{period}</p>
-      <ul className="list-disc pl-5 space-y-1">
-        {bullets.map((b, i) => (
-          <li key={i}>{b}</li>
-        ))}
-      </ul>
-    </div>
-  )
-}
+import Hero3D from './components/Hero3D'
+import Section from './components/Section'
+import BadgeList from './components/Badges'
+import ExperienceTimeline from './components/ExperienceTimeline'
+import ProjectGrid from './components/ProjectGrid'
 
 export default function App() {
   const contact = {
@@ -48,16 +14,59 @@ export default function App() {
     phone: '7984802928',
     email: 'jaychauhan.jk.101@gmail.com',
     linkedin: 'https://www.linkedin.com',
-    github: 'https://github.com',
   }
 
   const skills = {
-    VAPT: ['Nmap', 'Burp Suite', 'Metasploit', 'Wireshark', 'Web & Mobile VAPT', 'Network Penetration Testing'],
+    'Vulnerability Assessment & Penetration Testing (VAPT)': ['Nmap', 'Burp Suite', 'Metasploit', 'Wireshark', 'Web & Mobile VAPT', 'Network Penetration Testing'],
     'Application Security': ['OWASP Top 10', 'API Security Testing', 'Source Code Review (SAST)', 'Dynamic Analysis (DAST)'],
     'Security Operations & Defense': ['Threat Detection', 'Incident Response Protocols', 'Email Security (O365)', 'Insider Threat Prevention', 'Data Loss Prevention (DLP)'],
     'Scripting & Automation': ['Python', 'SQL', 'ASP.NET'],
     'Platforms & Infrastructure': ['Windows', 'Linux', 'AWS & Azure (Basic Security Management)'],
   }
+
+  const experience = [
+    {
+      role: 'Associate Security Analyst',
+      org: 'Net-Square',
+      period: 'Feb 2025 - Present',
+      bullets: [
+        'Perform VAPT for web/mobile, APIs, and network infrastructure',
+        'Analyze and document findings with remediation guidance for clients',
+        'Assist with Source Code Reviews and Red Team Assessments',
+      ],
+    },
+    {
+      role: 'Cyber Security Consultant',
+      org: 'Virtual Caim Private Limited - Ahmedabad',
+      period: 'Jan 2023 – Feb 2025',
+      bullets: [
+        'Led end-to-end VAPT across platforms to reinforce defenses',
+        'Delivered actionable recommendations to reduce vulnerabilities',
+        'Developed threat detection and incident response protocols',
+        'Collaborated widely to embed security and ensure compliance',
+      ],
+    },
+    {
+      role: 'Jr. Cybersecurity Analyst',
+      org: 'Virtual Caim - Ahmedabad',
+      period: 'Jun 2022 – Dec 2022',
+      bullets: [
+        'Conducted VAPT using Nmap, Burp Suite, and Metasploit',
+        'Reported findings with mitigation steps',
+        'Configured Microsoft O365 Security Center for secure journaling and detections',
+        'Supported Insider Threat Program and investigated DLP incidents',
+      ],
+    },
+    {
+      role: 'Cybersecurity Intern',
+      org: 'Virtual Caim - Ahmedabad',
+      period: 'Dec 2021 – May 2022',
+      bullets: [
+        'Assisted with research, documentation, and testing',
+        'Gained exposure to threat intel, malware analysis, and forensics',
+      ],
+    },
+  ]
 
   const projects = [
     {
@@ -90,127 +99,33 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar email={contact.email} />
+      <Hero3D name={contact.name} title="Cybersecurity Analyst" location={contact.location} phone={contact.phone} email={contact.email} />
 
-      {/* Hero with Spline */}
-      <section className="relative pt-24">
-        <div className="absolute inset-0">
-          <Spline scene="https://prod.spline.design/4HIlOdlXYYkZW66z/scene.splinecode" style={{ width: '100%', height: '100%' }} />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/70 to-white pointer-events-none" />
-
-        <div className="relative max-w-6xl mx-auto px-4">
-          <div className="py-28 md:py-36">
-            <p className="text-xs uppercase tracking-widest text-blue-700 font-semibold">Cybersecurity Analyst</p>
-            <h1 className="mt-3 text-3xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-slate-900">
-              {contact.name}
-            </h1>
-            <p className="mt-4 text-slate-700 max-w-2xl">
-              A motivated Cybersecurity Analyst with 3+ years in vulnerability assessment, penetration testing, and security operations. M.Sc. in IT Cybersecurity from Ganpat University. Seeking to contribute as an Associate Security Analyst at Net-Square.
-            </p>
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <a href="#projects" className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                <ExternalLink size={16} /> View Projects
-              </a>
-              <a href="#contact" className="inline-flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors">
-                <Mail size={16} /> Get in Touch
-              </a>
-            </div>
-
-            <div className="mt-6 flex flex-wrap gap-4 text-sm text-slate-700">
-              <span className="inline-flex items-center gap-2"><MapPin size={16} className="text-blue-600" /> {contact.location}</span>
-              <a href={`tel:${contact.phone}`} className="inline-flex items-center gap-2 hover:text-blue-600"><Phone size={16} className="text-blue-600" /> {contact.phone}</a>
-              <a href={`mailto:${contact.email}`} className="inline-flex items-center gap-2 hover:text-blue-600"><Mail size={16} className="text-blue-600" /> {contact.email}</a>
-              <a href={contact.linkedin} target="_blank" className="inline-flex items-center gap-2 hover:text-blue-600" rel="noreferrer"><Linkedin size={16} className="text-blue-600" /> LinkedIn</a>
-              <a href={contact.github} target="_blank" className="inline-flex items-center gap-2 hover:text-blue-600" rel="noreferrer"><Github size={16} className="text-blue-600" /> GitHub</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About */}
       <Section id="about" title="About">
         <p>
-          I specialize in end-to-end VAPT for web, mobile, APIs, and networks. I enjoy finding complex flaws through methodical testing, then partnering with teams to fix them. I also bring hands-on experience in email security, insider threat prevention, and strengthening incident response.
+          A motivated Cybersecurity Analyst with over 3 years of progressive experience in vulnerability assessment, penetration testing, and security operations. M.Sc. in IT Cybersecurity from Ganpat University with proven expertise in end-to-end VAPT, threat detection, email security configuration, and insider threat prevention. Eager to leverage technical skills and hands-on experience as an Associate Security Analyst at Net-Square.
         </p>
       </Section>
 
-      {/* Skills */}
       <Section id="skills" title="Technical Skills">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {Object.entries(skills).map(([group, items]) => (
             <div key={group} className="rounded-xl border border-black/5 p-5 bg-white shadow-sm">
               <h3 className="font-semibold text-slate-900 mb-3">{group}</h3>
-              <div className="-m-1">
-                {items.map((i) => (
-                  <Badge key={i}>{i}</Badge>
-                ))}
-              </div>
+              <BadgeList items={items} />
             </div>
           ))}
         </div>
       </Section>
 
-      {/* Experience */}
       <Section id="experience" title="Professional Experience">
-        <div className="relative">
-          <TimelineItem
-            role="Associate Security Analyst"
-            org="Net-Square"
-            period="Feb 2025 - Present"
-            bullets={[
-              'Perform VAPT for web/mobile, APIs, and network infrastructure',
-              'Analyze and document findings with remediation guidance for clients',
-              'Assist with Source Code Reviews and Red Team Assessments',
-            ]}
-          />
-          <TimelineItem
-            role="Cyber Security Consultant"
-            org="Virtual Caim Private Limited - Ahmedabad"
-            period="Jan 2023 – Feb 2025"
-            bullets={[
-              'Led end-to-end VAPT across platforms to reinforce defenses',
-              'Delivered actionable recommendations to reduce vulnerabilities',
-              'Developed threat detection and incident response protocols',
-              'Collaborated widely to embed security and ensure compliance',
-            ]}
-          />
-          <TimelineItem
-            role="Jr. Cybersecurity Analyst"
-            org="Virtual Caim - Ahmedabad"
-            period="Jun 2022 – Dec 2022"
-            bullets={[
-              'Conducted VAPT using Nmap, Burp Suite, and Metasploit',
-              'Reported findings with mitigation steps',
-              'Configured Microsoft O365 Security Center for secure journaling and detections',
-              'Supported Insider Threat Program and investigated DLP incidents',
-            ]}
-          />
-          <TimelineItem
-            role="Cybersecurity Intern"
-            org="Virtual Caim - Ahmedabad"
-            period="Dec 2021 – May 2022"
-            bullets={[
-              'Assisted with research, documentation, and testing',
-              'Gained exposure to threat intel, malware analysis, and forensics',
-            ]}
-          />
-        </div>
+        <ExperienceTimeline items={experience} />
       </Section>
 
-      {/* Projects */}
       <Section id="projects" title="Key Projects & Findings">
-        <div className="grid md:grid-cols-2 gap-6">
-          {projects.map((p) => (
-            <div key={p.title} className="rounded-xl border border-black/5 p-5 bg-white shadow-sm">
-              <h3 className="font-semibold text-slate-900">{p.title}</h3>
-              <p className="text-sm text-slate-600 mt-2">{p.desc}</p>
-              {p.note && <p className="text-xs text-slate-500 mt-2">{p.note}</p>}
-            </div>
-          ))}
-        </div>
+        <ProjectGrid projects={projects} />
       </Section>
 
-      {/* Education */}
       <Section id="education" title="Education">
         <ul className="space-y-3">
           <li>
@@ -224,7 +139,6 @@ export default function App() {
         </ul>
       </Section>
 
-      {/* Certifications */}
       <Section id="certifications" title="Certifications & Achievements">
         <ul className="list-disc pl-5 space-y-2">
           <li>Gurugram Police Cybersecurity Summer Internship (07/2021)</li>
@@ -233,7 +147,6 @@ export default function App() {
         </ul>
       </Section>
 
-      {/* Contact */}
       <Section id="contact" title="Contact">
         <div className="grid sm:grid-cols-2 gap-6">
           <a href={`mailto:${contact.email}`} className="flex items-center gap-3 p-4 rounded-xl border border-black/5 hover:border-blue-300 hover:bg-blue-50/50 transition-colors">
@@ -251,7 +164,6 @@ export default function App() {
         </div>
       </Section>
 
-      {/* Footer */}
       <footer className="border-t border-black/5">
         <div className="max-w-6xl mx-auto px-4 py-6 text-sm text-slate-500 flex flex-wrap items-center justify-between gap-3">
           <p>© {new Date().getFullYear()} {contact.name}. All rights reserved.</p>
